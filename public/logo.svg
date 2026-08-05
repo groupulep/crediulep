@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" width="100%" height="100%">
+  <!-- Exact vector reproduction of the NUC logo -->
+  <g transform="translate(20, 20)">
+    <!-- LETTER N (Purple) -->
+    <g id="n-letter">
+      <!-- Base N shape -->
+      <path d="M 45 220 
+               V 110 
+               A 65 65 0 0 1 175 110 
+               V 220 
+               H 128 
+               V 115 
+               A 22 22 0 0 0 84 115 
+               V 220 
+               Z" 
+            fill="#4b2e83" />
+      
+      <!-- Rounded top left arch cap -->
+      <path d="M 45 120 A 65 65 0 0 1 175 120 Z" fill="#820ad1" />
+      <path d="M 45 220 A 21.5 21.5 0 0 0 88 220 Z" fill="#820ad1" />
+      <path d="M 132 220 A 21.5 21.5 0 0 0 175 220 Z" fill="#820ad1" />
+      
+      <!-- Top-right overlapping ribbon layer -->
+      <path d="M 105 55 
+               A 65 65 0 0 1 175 110 
+               V 220 
+               H 128 
+               V 130 
+               Q 128 75 105 55 Z" 
+            fill="#684799" />
+            
+      <!-- Subtle white separation stroke -->
+      <path d="M 105 55 Q 128 75 128 130 V 220" 
+            fill="none" 
+            stroke="#ffffff" 
+            stroke-width="2.5" 
+            stroke-linecap="round" />
+    </g>
+
+    <!-- LETTER U (Blue) -->
+    <g id="u-letter" transform="translate(170, 0)">
+      <!-- Base U shape -->
+      <path d="M 45 40 
+               V 150 
+               A 65 65 0 0 0 175 150 
+               V 40 
+               H 128 
+               V 145 
+               A 22 22 0 0 1 84 145 
+               V 40 
+               Z" 
+            fill="#005db9" />
+            
+      <!-- Rounded caps for U -->
+      <path d="M 45 40 A 21.5 21.5 0 0 1 88 40 Z" fill="#005db9" />
+      <path d="M 132 40 A 21.5 21.5 0 0 1 175 40 Z" fill="#005db9" />
+      
+      <!-- Right stem inner ribbon fold -->
+      <path d="M 128 120 
+               Q 128 175 175 195 
+               V 40 
+               H 128 
+               Z" 
+            fill="#124899" />
+            
+      <!-- Separation curve -->
+      <path d="M 128 120 Q 128 175 175 195" 
+            fill="none" 
+            stroke="#ffffff" 
+            stroke-width="2.5" 
+            stroke-linecap="round" />
+    </g>
+
+    <!-- LETTER C (Green) -->
+    <g id="c-letter" transform="translate(340, 0)">
+      <!-- Outer C block -->
+      <path d="M 160 40 
+               H 80 
+               A 75 75 0 0 0 5 115 
+               V 145 
+               A 75 75 0 0 0 80 220 
+               H 160 
+               A 25 25 0 0 0 185 195 
+               V 165 
+               A 25 25 0 0 0 160 140 
+               H 85 
+               A 20 20 0 0 1 65 120 
+               V 110 
+               A 20 20 0 0 1 85 90 
+               H 160 
+               A 25 25 0 0 0 185 65 
+               V 65 
+               A 25 25 0 0 0 160 40 Z" 
+            fill="#0fa34a" />
+            
+      <!-- Lower inner ribbon fold -->
+      <path d="M 185 170 
+               Q 100 130 5 145 
+               A 75 75 0 0 0 80 220 
+               H 160 
+               A 25 25 0 0 0 185 195 
+               Z" 
+            fill="#097a35" />
+            
+      <!-- White separation stroke -->
+      <path d="M 185 170 Q 100 130 5 145" 
+            fill="none" 
+            stroke="#ffffff" 
+            stroke-width="2.5" 
+            stroke-linecap="round" />
+    </g>
+  </g>
+</svg>

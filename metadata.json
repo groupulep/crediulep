@@ -1,0 +1,8 @@
+{
+  "name": "CrediULEP WEB 001",
+  "description": "Una fintech innovadora de préstamos y servicios financieros en convenio exclusivo con la Fundación ULEP, ofreciendo tasas preferenciales, simuladores interactivos de crédito y una experiencia digital premium para la comunidad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
