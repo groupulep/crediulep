@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { ShieldCheck, X } from 'lucide-react';
 
-export default function Footer() {
+interface FooterProps {
+  theme?: 'white' | 'purple';
+}
+
+export default function Footer({ theme = 'white' }: FooterProps) {
+  const isWhite = theme === 'white';
   const currentYear = new Date().getFullYear();
   const [activeModal, setActiveModal] = useState<string | null>(null);
 
@@ -11,9 +16,19 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#190028] text-white pt-16 pb-12 relative overflow-hidden border-t border-[#820ad1]/30">
+    <footer
+      className={`pt-16 pb-12 relative overflow-hidden border-t transition-colors ${
+        isWhite
+          ? 'bg-slate-950 text-white border-slate-800'
+          : 'bg-[#190028] text-white border-[#820ad1]/30'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 pb-12 border-b border-[#820ad1]/20">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 pb-12 border-b ${
+            isWhite ? 'border-slate-800' : 'border-[#820ad1]/20'
+          }`}
+        >
           {/* Brand Col - 5 Cols */}
           <div className="md:col-span-5 space-y-5">
             <div className="flex items-center gap-3">

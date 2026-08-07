@@ -4,9 +4,11 @@ import { Mail, User, Sparkles, QrCode, ArrowRight, ArrowLeft, Phone, Zap } from 
 
 interface WaitlistFormProps {
   initialLoanAmount: number;
+  theme?: 'white' | 'purple';
 }
 
-export default function WaitlistForm({ initialLoanAmount }: WaitlistFormProps) {
+export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: WaitlistFormProps) {
+  const isWhite = theme === 'white';
   const [step, setStep] = useState(1);
   const [loanAmount, setLoanAmount] = useState<number>(initialLoanAmount || 1000000); // 1M COP default
   const [loanTermDays, setLoanTermDays] = useState<number>(30); // days default (30 days = 1 month)
@@ -28,10 +30,10 @@ export default function WaitlistForm({ initialLoanAmount }: WaitlistFormProps) {
     }).format(val);
   };
 
-  // Interest calculation (2.5% monthly fixed rate prorated by days)
+  // Interest calculation (1.5% E.A. prorated by days)
   const calculateInterest = (principal: number, days: number) => {
-    const monthlyRate = 0.025;
-    return principal * monthlyRate * (days / 30);
+    const annualRate = 0.015;
+    return principal * annualRate * (days / 365);
   };
 
   const totalInterest = calculateInterest(loanAmount, loanTermDays);
@@ -87,7 +89,13 @@ export default function WaitlistForm({ initialLoanAmount }: WaitlistFormProps) {
   return (
     <section id="solicitud" className="py-16 bg-transparent relative scroll-mt-20">
       <div className="max-w-3xl mx-auto px-6">
-        <div className="bg-white border border-white/80 shadow-2xl shadow-black/25 rounded-[36px] overflow-hidden text-[#191919]">
+        <div
+          className={`border shadow-2xl rounded-[36px] overflow-hidden text-[#191919] transition-all ${
+            isWhite
+              ? 'bg-white border-slate-200/90 shadow-purple-900/10'
+              : 'bg-white border-white/80 shadow-black/25'
+          }`}
+        >
           {/* Progress Bar Top */}
           {step < 3 && (
             <div className="w-full h-2 bg-[#f3e8ff] flex">
@@ -121,7 +129,7 @@ export default function WaitlistForm({ initialLoanAmount }: WaitlistFormProps) {
                 <div className="space-y-2">
                   <h3 className="text-2xl font-extrabold text-[#191919] font-display">Pre-Aprobación Express</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Ajusta el monto y el plazo deseado. Disfruta de la tasa fija preferencial del <strong className="text-[#820ad1]">2.5% mensual</strong>.
+                    Ajusta el monto y el plazo deseado. Disfruta de la tasa fija preferencial del <strong className="text-[#820ad1]">1.5% E.A.</strong>
                   </p>
                 </div>
 
@@ -201,7 +209,7 @@ export default function WaitlistForm({ initialLoanAmount }: WaitlistFormProps) {
                       </span>
                     </div>
                     <span className="text-xs font-bold text-[#820ad1] bg-white border border-[#820ad1]/20 px-3 py-1.5 rounded-xl shadow-sm text-center">
-                      2.5% Tasa Fija
+                      1.5% E.A.
                     </span>
                   </div>
                 </div>

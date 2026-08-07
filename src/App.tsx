@@ -6,7 +6,6 @@ import AgreementsSection from './components/AgreementsSection';
 import BenefitsSection from './components/BenefitsSection';
 import WaitlistForm from './components/WaitlistForm';
 import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
 
 export default function App() {
   const [calculatorState, setCalculatorState] = useState<LoanData>({
@@ -15,6 +14,11 @@ export default function App() {
   });
 
   const [activeTab, setActiveTab] = useState<'inicio' | 'beneficios' | 'solicitud'>('inicio');
+  const [theme, setTheme] = useState<'white' | 'purple'>('white');
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'white' ? 'purple' : 'white'));
+  };
 
   const handleScrollToWaitlist = (loanOverride?: number) => {
     if (loanOverride !== undefined) {
@@ -27,39 +31,62 @@ export default function App() {
     }
   };
 
+  const isWhite = theme === 'white';
+
   return (
-    <div className="min-h-screen bg-[#820ad1] text-white font-sans selection:bg-white selection:text-[#820ad1] scroll-smooth antialiased relative overflow-hidden">
-      {/* Background Ambient Blurs for Inverted Nu Purple Canvas */}
-      <div className="absolute top-[-100px] right-[-100px] w-[600px] h-[600px] bg-white/10 rounded-full filter blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute top-[30%] left-[-150px] w-[500px] h-[500px] bg-purple-400/20 rounded-full filter blur-[130px] pointer-events-none -z-10" />
-      <div className="absolute bottom-[20%] right-[-100px] w-[500px] h-[500px] bg-white/10 rounded-full filter blur-[140px] pointer-events-none -z-10" />
+    <div
+      className={`min-h-screen font-sans scroll-smooth antialiased relative overflow-hidden transition-colors duration-500 ${
+        isWhite
+          ? 'bg-slate-50 text-slate-900 selection:bg-[#820ad1] selection:text-white'
+          : 'bg-[#820ad1] text-white selection:bg-white selection:text-[#820ad1]'
+      }`}
+    >
+      {/* Background Ambient Blurs */}
+      {isWhite ? (
+        <>
+          <div className="absolute top-[-100px] right-[-100px] w-[600px] h-[600px] bg-purple-300/30 rounded-full filter blur-[140px] pointer-events-none -z-10" />
+          <div className="absolute top-[30%] left-[-150px] w-[500px] h-[500px] bg-[#820ad1]/10 rounded-full filter blur-[130px] pointer-events-none -z-10" />
+          <div className="absolute bottom-[20%] right-[-100px] w-[500px] h-[500px] bg-purple-200/40 rounded-full filter blur-[140px] pointer-events-none -z-10" />
+        </>
+      ) : (
+        <>
+          <div className="absolute top-[-100px] right-[-100px] w-[600px] h-[600px] bg-white/10 rounded-full filter blur-[140px] pointer-events-none -z-10" />
+          <div className="absolute top-[30%] left-[-150px] w-[500px] h-[500px] bg-purple-400/20 rounded-full filter blur-[130px] pointer-events-none -z-10" />
+          <div className="absolute bottom-[20%] right-[-100px] w-[500px] h-[500px] bg-white/10 rounded-full filter blur-[140px] pointer-events-none -z-10" />
+        </>
+      )}
 
       {/* Main Navbar */}
       <Navbar
         onJoinClick={() => handleScrollToWaitlist()}
         activeSection={activeTab}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       {/* Hero Section */}
       <HeroSection
         onCtaClick={() => handleScrollToWaitlist()}
+        theme={theme}
       />
 
       {/* Agreements Box */}
-      <AgreementsSection />
+      <AgreementsSection theme={theme} />
 
       {/* Benefits Section */}
       <BenefitsSection
         onCtaClick={() => handleScrollToWaitlist()}
+        theme={theme}
       />
 
       {/* Pre-Aprobación Express Application Form */}
       <WaitlistForm
         initialLoanAmount={calculatorState.loanAmount}
+        theme={theme}
       />
 
       {/* Footer */}
-      <Footer />
+      <Footer theme={theme} />
     </div>
   );
 }
