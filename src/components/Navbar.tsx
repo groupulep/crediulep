@@ -102,7 +102,7 @@ export default function Navbar({ onJoinClick, theme = 'white', onToggleTheme }: 
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://groupulep.github.io/credito/"
+            href="https://groupulep.github.io/BANKULEP/"
             target="_blank"
             rel="noopener noreferrer"
             className={`px-4 py-2.5 rounded-full border font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer ${
@@ -166,7 +166,7 @@ export default function Navbar({ onJoinClick, theme = 'white', onToggleTheme }: 
           <hr className={isWhite ? 'border-slate-200' : 'border-white/10'} />
 
           <a
-            href="https://groupulep.github.io/credito/"
+            href="https://groupulep.github.io/BANKULEP/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMobileMenuOpen(false)}

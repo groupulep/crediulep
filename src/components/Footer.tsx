@@ -58,7 +58,7 @@ export default function Footer({ theme = 'white' }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="https://groupulep.github.io/credito/"
+                  href="https://groupulep.github.io/BANKULEP/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors text-purple-300 font-extrabold flex items-center gap-1 mt-1"
