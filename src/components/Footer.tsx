@@ -42,7 +42,7 @@ export default function Footer({ theme = 'white' }: FooterProps) {
 
             <div className="flex items-center gap-3 text-purple-200/80 pt-2">
               <ShieldCheck className="w-5 h-5 text-[#a84ee6] shrink-0" />
-              <span className="text-xs font-semibold text-purple-200/80">Trámites Digitales Seguros con Encriptación SSL</span>
+              <span className="text-xs font-semibold text-purple-200/80">Trámites Digitales Seguros con Cifrado AES-256 y SSL</span>
             </div>
           </div>
 
@@ -89,10 +89,10 @@ export default function Footer({ theme = 'white' }: FooterProps) {
                 Términos
               </button>
               <button
-                onClick={(e) => handleLegalClick(e, 'Metodología Tasa Fija 2.5%')}
+                onClick={(e) => handleLegalClick(e, 'Metodología Tasa Fija 1.5% E.A.')}
                 className="text-xs text-purple-300 hover:text-white font-bold cursor-pointer"
               >
-                Metodología Tasa Fija
+                Metodología Tasa Fija 1.5% E.A.
               </button>
             </div>
           </div>
