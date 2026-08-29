@@ -23,7 +23,6 @@ import {
   maskName,
   maskEmail,
   maskPhone,
-  maskDocument,
 } from '../utils/crypto';
 
 interface WaitlistFormProps {
@@ -37,7 +36,6 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
   const [loanAmount, setLoanAmount] = useState<number>(initialLoanAmount || 1000000); // 1M COP default
   const [loanTermDays, setLoanTermDays] = useState<number>(30); // days default (30 days = 1 month)
   const [name, setName] = useState('');
-  const [documentNumber, setDocumentNumber] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [relation, setRelation] = useState<WaitlistData['relation']>('Estudiante');
@@ -97,7 +95,6 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
         const confidentialPayload = JSON.stringify({
           folio: `CO-${generatedFolio}`,
           name: name || 'Solicitante CrediULEP',
-          documentNumber: documentNumber || 'N/A',
           email: email || 'solicitud@crediulep.co',
           phone: phone || '+57 300 000 0000',
           relation,
@@ -284,36 +281,33 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
               </div>
             )}
 
-            {/* STEP 2: USER DETAILS & ENCRYPTED CONFIDENTIAL INPUTS */}
+            {/* STEP 2: USER DETAILS & BASIC CONTACT INFO */}
             {step === 2 && (
               <div className="space-y-6 animate-in fade-in duration-300">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-2xl font-extrabold text-[#191919] font-display">Datos del Solicitante</h3>
+                    <h3 className="text-2xl font-extrabold text-[#191919] font-display">Datos Básicos de Contacto</h3>
                     <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                      Cifrado de Extremo a Extremo
+                      Sitio Seguro & Sin Compromiso
                     </span>
                   </div>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Ingresa tus datos personales. Toda tu información confidencial es protegida mediante encriptación criptográfica de grado bancario (AES-256 y SHA-256).
+                    Ingresa tus datos básicos de contacto para enviarte la cotización y simulación detallada a tu WhatsApp. No solicitamos contraseñas ni documentos sensibles.
                   </p>
                 </div>
 
                 <div className="space-y-4 pt-2">
                   {/* Name */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                      <span>Nombre Completo</span>
-                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                        <Lock className="w-2.5 h-2.5" /> Encriptado
-                      </span>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+                      Nombre o Apodo de Contacto
                     </label>
                     <div className="relative">
                       <User className="absolute left-3.5 top-3.5 w-4 h-4 text-[#820ad1]" />
                       <input
                         type="text"
-                        placeholder="Ej. Carlos Andrés Gómez"
+                        placeholder="Ej. Carlos Gómez"
                         value={name}
                         onChange={(e) => {
                           setName(e.target.value);
@@ -327,65 +321,16 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
                     {errors.name && <p className="text-xs text-red-500 font-semibold">{errors.name}</p>}
                   </div>
 
-                  {/* Document / Cédula */}
+                  {/* Phone / WhatsApp */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                      <span>Documento de Identidad (Cédula / TI)</span>
-                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                        <Lock className="w-2.5 h-2.5" /> Confidencial Cifrado
-                      </span>
-                    </label>
-                    <div className="relative">
-                      <CreditCard className="absolute left-3.5 top-3.5 w-4 h-4 text-[#820ad1]" />
-                      <input
-                        type="text"
-                        placeholder="Ej. 1032456789 (Protegido por Cifrado)"
-                        value={documentNumber}
-                        onChange={(e) => setDocumentNumber(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#820ad1]/20 focus:border-[#820ad1] text-[#191919]"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Email */}
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                      <span>Correo Electrónico</span>
-                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                        <Lock className="w-2.5 h-2.5" /> Encriptado
-                      </span>
-                    </label>
-                    <div className="relative">
-                      <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-[#820ad1]" />
-                      <input
-                        type="email"
-                        placeholder="Ej. carlos.gomez@ejemplo.com"
-                        value={email}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                          if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
-                        }}
-                        className={`w-full pl-10 pr-4 py-3 bg-white border rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#820ad1]/20 focus:border-[#820ad1] text-[#191919] ${
-                          errors.email ? 'border-red-400' : 'border-slate-200'
-                        }`}
-                      />
-                    </div>
-                    {errors.email && <p className="text-xs text-red-500 font-semibold">{errors.email}</p>}
-                  </div>
-
-                  {/* Phone */}
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                      <span>Teléfono / WhatsApp</span>
-                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                        <Lock className="w-2.5 h-2.5" /> Encriptado
-                      </span>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+                      Número de WhatsApp / Celular
                     </label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-3.5 w-4 h-4 text-[#820ad1]" />
                       <input
                         type="tel"
-                        placeholder="Ej. +57 300 123 4567"
+                        placeholder="Ej. 316 900 8561"
                         value={phone}
                         onChange={(e) => {
                           setPhone(e.target.value);
@@ -399,9 +344,30 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
                     {errors.phone && <p className="text-xs text-red-500 font-semibold">{errors.phone}</p>}
                   </div>
 
+                  {/* Optional Email */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+                      <span>Correo Electrónico (Opcional)</span>
+                      <span className="text-[10px] text-slate-400 font-normal">Para envío de constancia</span>
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-[#820ad1]" />
+                      <input
+                        type="email"
+                        placeholder="Ej. carlos@ejemplo.com"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                        }}
+                        className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#820ad1]/20 focus:border-[#820ad1] text-[#191919]"
+                      />
+                    </div>
+                  </div>
+
                   {/* Relation */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Comunidad / Vínculo ULEP</label>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Vínculo o Afiliación</label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
                       {relations.map((rel) => (
                         <button
@@ -422,7 +388,7 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
 
                   {/* Preferred Payment / Desembolso Method */}
                   <div className="space-y-2 pt-2">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Método de Desembolso en Colombia</label>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Preferencia de Desembolso</label>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                       {paymentMethods.map((pm) => (
                         <button
@@ -442,13 +408,13 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
                     </div>
                   </div>
 
-                  {/* Security Notice */}
-                  <div className="p-3.5 bg-purple-50/80 border border-purple-200/80 rounded-2xl flex items-start gap-3">
-                    <ShieldCheck className="w-5 h-5 text-[#820ad1] shrink-0 mt-0.5" />
-                    <div className="space-y-1 text-xs text-slate-600 leading-relaxed">
-                      <p className="font-bold text-[#820ad1]">Privacidad y Protección Criptográfica:</p>
-                      <p className="text-[11px]">
-                        Tus datos confidenciales son encriptados en el navegador mediante el estándar criptográfico internacional <strong>AES-GCM de 256 bits</strong> con firma digital <strong>SHA-256</strong>.
+                  {/* Safe Notice */}
+                  <div className="p-3.5 bg-emerald-50/90 border border-emerald-200 rounded-2xl flex items-start gap-3">
+                    <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
+                    <div className="space-y-1 text-xs text-slate-700 leading-relaxed">
+                      <p className="font-bold text-emerald-900">Garantía de Confianza y Seguridad:</p>
+                      <p className="text-[11px] text-emerald-800">
+                        Esta simulación es informativa y 100% gratuita. No solicitamos números de cuenta bancaria, contraseñas, PIN ni documentos de identidad en este formulario.
                       </p>
                     </div>
                   </div>
@@ -466,7 +432,7 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
                         className="mt-1 accent-[#820ad1] rounded cursor-pointer"
                       />
                       <span className="text-xs text-slate-500 leading-relaxed">
-                        Acepto los Términos de Servicio y la Política de Protección de Datos y Cifrado Confidencial de <strong>CrediULEP Colombia</strong>.
+                        Acepto los Términos de Servicio y la Política de Protección de Datos de <strong>CrediULEP Colombia</strong>.
                       </span>
                     </label>
                     {errors.terms && <p className="text-xs text-red-500 font-semibold">{errors.terms}</p>}
@@ -546,14 +512,6 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
                         <span className="opacity-70">Solicitante:</span>
                         <span className="font-bold">{showMaskedData ? maskName(name) : name}</span>
                       </div>
-                      {documentNumber && (
-                        <div className="flex justify-between">
-                          <span className="opacity-70">Documento:</span>
-                          <span className="font-mono font-bold text-purple-200">
-                            {showMaskedData ? maskDocument(documentNumber) : documentNumber}
-                          </span>
-                        </div>
-                      )}
                       <div className="flex justify-between">
                         <span className="opacity-70">WhatsApp / Teléfono:</span>
                         <span className="font-bold text-purple-100">{showMaskedData ? maskPhone(phone) : phone}</span>
@@ -667,7 +625,6 @@ export default function WaitlistForm({ initialLoanAmount, theme = 'white' }: Wai
                     onClick={() => {
                       setStep(1);
                       setName('');
-                      setDocumentNumber('');
                       setEmail('');
                       setPhone('');
                       setTerms(false);
