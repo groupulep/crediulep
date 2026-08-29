@@ -1,0 +1,9 @@
+# Security Policy and Vulnerability Disclosure for CrediULEP
+Contact: mailto:groupulep@gmail.com
+Contact: https://wa.me/573169008561
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: es, en
+Canonical: https://groupulep.github.io/BANKULEP/.well-known/security.txt
+Policy: https://groupulep.github.io/BANKULEP/
+Encryption: AES-256-GCM / TLS 1.3
+Acknowledgments: https://groupulep.github.io/BANKULEP/

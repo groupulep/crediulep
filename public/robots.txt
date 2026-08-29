@@ -1,0 +1,13 @@
+# Robots.txt for CrediULEP
+# Validated HTTPS Fintech Application
+
+User-agent: *
+Allow: /
+Disallow: /api/private/
+
+# Security and Verification
+Allow: /google8bc9c962f98182be.html
+Allow: /.well-known/security.txt
+
+# Sitemap
+Sitemap: https://groupulep.github.io/BANKULEP/sitemap.xml

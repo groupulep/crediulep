@@ -119,9 +119,47 @@ export default function Footer({ theme = 'white' }: FooterProps) {
               <span className="text-[10px] text-[#820ad1] font-extrabold uppercase tracking-wider block">Documentación Fintech Colombia</span>
               <h3 className="font-display font-black text-xl">{activeModal}</h3>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Términos legales y reglamentación aplicable para la pre-aprobación de créditos express con CrediULEP.
-            </p>
+            {activeModal === 'Aviso de Privacidad' && (
+              <div className="space-y-2 text-xs text-slate-600 leading-relaxed max-h-72 overflow-y-auto pr-1">
+                <p>
+                  <strong>Responsable del Tratamiento:</strong> GROUP ULEP S.A.S. (NIT y personería en Colombia). En cumplimiento de la Ley Estatutaria 1581 de 2012 y el Decreto 1377 de 2013 (Régimen General de Protección de Datos Personales - Habeas Data).
+                </p>
+                <p>
+                  <strong>Seguridad y Cifrado Criptográfico:</strong> Toda la información suministrada (nombres, documento, teléfono y correo) es protegida mediante algoritmos de cifrado de extremo a extremo <strong>AES-GCM de 256 bits</strong> y firmado digital <strong>SHA-256</strong> sobre canales seguros <strong>HTTPS / TLS 1.3</strong>.
+                </p>
+                <p>
+                  <strong>Finalidad:</strong> Evaluación crediticia de pre-aprobación express, emisión de constancia digital de crédito y contacto directo con el titular a través de canales autorizados. Sus datos nunca son comercializados con terceros.
+                </p>
+                <p>
+                  <strong>Derechos del Titular:</strong> Conocer, actualizar, rectificar y solicitar la supresión de sus datos personales escribiendo a <em>groupulep@gmail.com</em>.
+                </p>
+              </div>
+            )}
+
+            {activeModal === 'Términos y Condiciones' && (
+              <div className="space-y-2 text-xs text-slate-600 leading-relaxed max-h-72 overflow-y-auto pr-1">
+                <p>
+                  <strong>Naturaleza del Servicio:</strong> CrediULEP es una plataforma tecnológica financiera operada por GROUP ULEP S.A.S. que facilita la pre-aprobación y gestión de microcréditos digitales para la comunidad y personas vinculadas.
+                </p>
+                <p>
+                  <strong>Conexión Segura:</strong> Este sitio opera exclusivamente bajo protocolo HTTPS con certificados SSL/TLS validados. Ninguna transacción solicita contraseñas bancarias directas ni claves secretas de cajero.
+                </p>
+                <p>
+                  <strong>Pre-Aprobación Express:</strong> La simulación y solicitud de pre-aprobación inicial es 100% gratuita. La aprobación definitiva está sujeta a verificación de identidad y capacidad de desembolso por los canales oficiales autorizados.
+                </p>
+              </div>
+            )}
+
+            {activeModal === 'Metodología Tasa Fija 1.5% E.A.' && (
+              <div className="space-y-2 text-xs text-slate-600 leading-relaxed max-h-72 overflow-y-auto pr-1">
+                <p>
+                  <strong>Transparencia de Costos:</strong> Tasa preferencial fija del 1.5% Efectiva Anual (E.A.), cumpliendo estrictamente con los límites de tasa de usura legal certificados por la Superintendencia Financiera de Colombia.
+                </p>
+                <p>
+                  <strong>Sin Cobros Ocultos:</strong> Simulador de crédito transparente donde se desglosan el capital, intereses prorrateados exactos por días o meses y total a desembolsar sin cláusulas abusivas ni comisiones ocultas.
+                </p>
+              </div>
+            )}
             <button
               onClick={() => setActiveModal(null)}
               className="w-full py-3 bg-[#820ad1] hover:bg-[#6d08b1] text-white font-bold text-xs rounded-2xl transition-all cursor-pointer shadow-md"
